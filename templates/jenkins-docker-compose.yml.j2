@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+---
+version: "3"
+
+services:
+  jenkins:
+    container_name: jenkins
+    image: benjaminnomine/rpi-jenkins
+    hostname: '{{ jenkins_hostname }}'
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    expose:
+      - 8080
+      - 50000
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - './certs/client:/certs/client'
+      - './jenkins:/var/jenkins_home'
+    restart: unless-stopped

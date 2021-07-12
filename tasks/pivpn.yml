@@ -1,0 +1,20 @@
+---
+- name: Create pivpn folder on Pi.
+  ansible.builtin.file:
+    path: ~/pivpn
+    state: directory
+    mode: 0755
+  become: false
+
+- name: Copy pivpn docker-compose template to Pi.
+  ansible.builtin.template:
+    src: templates/pivpn-docker-compose.yml.j2
+    dest: ~/pivpn/docker-compose.yml
+    mode: '0640'
+  become: false
+
+- name: Ensure pivpn is running.
+  community.docker.docker_compose:
+    project_src: ~/pivpn/
+    build: false
+  become: false

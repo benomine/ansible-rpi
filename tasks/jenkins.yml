@@ -1,0 +1,20 @@
+---
+- name: Create jenkins folder on Pi.
+  ansible.builtin.file:
+    path: ~/jenkins
+    state: directory
+    mode: 0755
+  become: false
+
+- name: Copy jenkins docker-compose template to Pi.
+  ansible.builtin.template:
+    src: templates/jenkins-docker-compose.yml.j2
+    dest: ~/jenkins/docker-compose.yml
+    mode: '0640'
+  become: false
+
+- name: Ensure jenkins is running.
+  community.docker.docker_compose:
+    project_src: ~/jenkins/
+    build: false
+  become: false

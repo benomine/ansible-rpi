@@ -25,3 +25,11 @@ shelly_plug_http_password: "password"
 
 # Starlink configuration. (Also requires `monitoring_enable`)
 starlink_enable: false
+
+# Jenkins server
+jenkins_enable: false
+jenkins_hostname: jenkins
+
+# PiVPN server
+pivpn_enable: false
+pivpn_hostname: pivpn
